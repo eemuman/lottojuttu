@@ -87,4 +87,22 @@ public class Arrays {
         }
         return true;
     }
+
+    public static int[] sortNumbers(int[] numbers) {
+        //Lets put the numbers into order from smallest to highest
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = i +1; j < numbers.length; j++) {
+                if(numbers[i] > numbers[j]) {
+                    int temp = numbers[i];
+                    numbers[i] = numbers[j];
+                    numbers[j] = temp;
+                }
+            }
+        }
+        return numbers;
+    }
+
+    public static int[] leadingZeroes(int[] numbers) {
+
+    }
 }
