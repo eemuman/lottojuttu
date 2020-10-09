@@ -1,5 +1,7 @@
 package fi.tuni.tamk.tiko.eemil;
-import fi.tuni.tamk.tiko.eemil.util.*;
+
+import fi.tuni.tamk.tiko.eemil.util.Arrays;
+import fi.tuni.tamk.tiko.eemil.util.MyConsole;
 
 //HUOM!! VUOTENA KÄYTETÄÄN 52 VIIKKOA, EI 52,143 VIIKKOA!!!!
 
@@ -17,7 +19,10 @@ public class Main {
     public static void main(String[] args) {
         //Init the players Lotto numbers
         int[] playerNumbers = Arrays.lottoArrayUser(min, max);
+        //Sort the users Lotto numbers
+        Arrays.sortNumbers(playerNumbers);
+
         //Go to the main loop
-        MyConsole.playLotto(min, max, playerNumbers);
+       MyConsole.playLotto(min, max, playerNumbers);
     }
 }

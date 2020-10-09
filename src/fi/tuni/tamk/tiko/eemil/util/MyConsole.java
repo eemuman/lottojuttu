@@ -1,6 +1,8 @@
 package fi.tuni.tamk.tiko.eemil.util;
-import java.io.*;
-import static fi.tuni.tamk.tiko.eemil.Main.*;
+
+import java.io.Console;
+
+import static fi.tuni.tamk.tiko.eemil.Main.calc;
 
 public class MyConsole {
 
@@ -60,6 +62,8 @@ public class MyConsole {
         while(contains < 7) {
             // Generate random lotto numbers
             int[] lottoNumbers = Arrays.lottoArrayRandomNumbers(min, max);
+            // Put the random numbers into order from smallest -> highest
+            Arrays.sortNumbers(lottoNumbers);
             // Test if the numbers match (Jackpot!)
             contains = Arrays.containsSameValues(playerNumbers, lottoNumbers);
             // Go to the next week...
@@ -67,8 +71,8 @@ public class MyConsole {
             // Check at what point we got what.
             containsChecker(contains, weeks, containsWeeks);
         }
-        for (int i = 0; i < containsWeeks.length; i++) {
-            System.out.println(containsWeeks[i]);
+        for (int containsWeek : containsWeeks) {
+            System.out.println(containsWeek);
         }
 
             //Calculating the years all the wins took
