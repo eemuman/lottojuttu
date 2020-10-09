@@ -77,7 +77,7 @@ public class Arrays {
     }
 
     public static boolean testDuplicates(int[] arraya) {
-        //Testaa onko arrayssa toistuvia numeroita
+        //Test if an Array has duplicate numbers
         for (int i = 0; i < arraya.length; i++) {
             for (int j = i + 1; j < arraya.length; j++) {
                 if(arraya[i] == arraya[j]) {
