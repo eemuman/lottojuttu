@@ -53,11 +53,12 @@ public class MyConsole {
             return realInt;
     }
 
-    public static void playLotto(int min, int max, int[] playerNumbers) {
+    public static void playLotto(int min, int max, int[] playerNumbers, String[] userLotto) {
         int contains = 0;
         int [] containsWeeks = new int[playerNumbers.length];
         int [] containsYears;
         int weeks = 0;
+        String[] randomLotto;
         System.out.println(calc);
         while(contains < 7) {
             // Generate random lotto numbers
@@ -70,11 +71,11 @@ public class MyConsole {
             weeks++;
             // Check at what point we got what.
             containsChecker(contains, weeks, containsWeeks);
+            //Check and add leading zeroes for numbers under 10
+        //    randomLotto = leadingZero(lottoNumbers);
+            // Print the numbers, there will be MANY!!!
+          //  printNumbers(userLotto, randomLotto);
         }
-        for (int containsWeek : containsWeeks) {
-            System.out.println(containsWeek);
-        }
-
             //Calculating the years all the wins took
         containsYears = Math.weeksToYears(containsWeeks);
             //Calculating the leftover (rounding) weeks for the wins.
@@ -100,5 +101,33 @@ public class MyConsole {
             System.out.println("Got " + amount + " right, it took " + containsYears[i] + " years and " + containsWeeks[i] + " weeks");
             amount++;
         }
+    }
+
+    public static String[] leadingZero(int[] numbers) {
+        //Add leading zero if number is < 10
+        String [] temp = new String[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] < 10) {
+                String format = String.format("%02d", numbers[i]);
+                temp[i] = format;
+            } else {
+                temp[i] = String.valueOf(numbers[i]);
+            }
+        }
+        return temp;
+    }
+
+    public static void printNumbers(String[] userLotto, String[]randLotto) {
+        //Print the users and the generated lotto numbers
+        System.out.print("Users numbers: ");
+        for (String lotto : userLotto) {
+            System.out.print("[" + lotto + "] ");
+        }
+        System.out.println();
+        System.out.print("Lotto numbers: ");
+        for (String lotto : randLotto) {
+            System.out.print("[" + lotto + "] ");
+        }
+        System.out.println();
     }
 }
