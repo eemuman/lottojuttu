@@ -26,12 +26,13 @@ public class Math {
         return newLotto;
     }
 
-    public static int [] weeksToYears (int[] weeks) {
-        int[] years = new int[weeks.length];
+    public static int [] weeksToYears (int[] containsWeeks, int[] containsYears) {
+        int[] years = new int[containsWeeks.length];
         // Turning the weeks to years
-        for (int i = 0; i < weeks.length; i++) {
-            years[i] = weeks[i] / 52;
+        for (int i = 0; i < containsWeeks.length; i++) {
+            years[i] = containsWeeks[i] / 52;
         }
+        Math.leftoverWeeks(containsWeeks, containsYears);
         return years;
     }
     public static int[] leftoverWeeks (int[] weeks, int[] years) {
@@ -44,6 +45,15 @@ public class Math {
         for (int i = 0; i < weeks.length; i++) {
             years[i] /= 52;
         }
+        return weeks;
+    }
+
+    public static int jWeekstoYears (int weeks) {
+         return weeks / 52;
+    }
+    public static int jYearstoWeeks(int weeks, int years) {
+        years *= 52;
+        weeks -= years;
         return weeks;
     }
 }

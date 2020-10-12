@@ -53,10 +53,12 @@ public class MyConsole {
             return realInt;
     }
 
-    public static void playLotto(int min, int max, int[] playerNumbers, String[] userLotto) {
+    public static void playLotto(int min, int max, int[] playerNumbers, String[] userLotto, boolean onlyJackpot, boolean showAll) {
         int contains = 0;
+        int jackWeeks = 0;
+        int jackYears;
         int [] containsWeeks = new int[playerNumbers.length];
-        int [] containsYears;
+        int [] containsYears = new int[playerNumbers.length];
         int weeks = 0;
         String[] randomLotto;
         System.out.println(calc);
@@ -64,32 +66,45 @@ public class MyConsole {
             // Generate random lotto numbers
             int[] lottoNumbers = Arrays.lottoArrayRandomNumbers(min, max);
             // Put the random numbers into order from smallest -> highest
-            Arrays.sortNumbers(lottoNumbers);
+            if(showAll || onlyJackpot) {
+                Arrays.sortNumbers(lottoNumbers);
+            }
             // Test if the numbers match (Jackpot!)
-            contains = Arrays.containsSameValues(playerNumbers, lottoNumbers);
+            contains = Arrays.containsSameValues(playerNumbers, lottoNumbers, onlyJackpot);
             // Go to the next week...
             weeks++;
             // Check at what point we got what.
-            containsChecker(contains, weeks, containsWeeks);
-            //Check and add leading zeroes for numbers under 10
-        //    randomLotto = leadingZero(lottoNumbers);
-            // Print the numbers, there will be MANY!!!
-          //  printNumbers(userLotto, randomLotto);
+            containsChecker(contains, weeks, containsWeeks, onlyJackpot);
+            if(showAll) {
+                randomLotto = leadingZero(lottoNumbers);
+                // Print the numbers, there will be MANY!!!
+                printNumbers(userLotto, randomLotto);
+            }
         }
+        if(!onlyJackpot) {
             //Calculating the years all the wins took
-        containsYears = Math.weeksToYears(containsWeeks);
-            //Calculating the leftover (rounding) weeks for the wins.
-        Math.leftoverWeeks(containsWeeks, containsYears);
+            containsYears = Math.weeksToYears(containsWeeks, containsYears);
         //Print the results
         printResults(containsYears, containsWeeks);
+        } else {
+            jackYears = Math.jWeekstoYears(jackWeeks);
+            jackWeeks = Math.jYearstoWeeks(jackWeeks, jackYears);
+            jPrintResults(jackYears, jackWeeks);
+        }
     }
 
-    public static int [] containsChecker(int contains,int weeks, int[] containsWeeks) {
-        //Check if the current lottery win is not initialized and initialize it with how many weeks it took..
-        while (contains >0) {
-            contains--;
-            if(containsWeeks[contains] == 0) {
+    public static int [] containsChecker(int contains,int weeks, int[] containsWeeks, boolean onlyJackpot) {
+        if(onlyJackpot) {
+            if(contains == 7) {
                 containsWeeks[contains] = weeks;
+            }
+        } else {
+            //Check if the current lottery win is not initialized and initialize it with how many weeks it took..
+            while (contains > 0) {
+                contains--;
+                if (containsWeeks[contains] == 0) {
+                    containsWeeks[contains] = weeks;
+                }
             }
         }
         return containsWeeks;
@@ -101,6 +116,9 @@ public class MyConsole {
             System.out.println("Got " + amount + " right, it took " + containsYears[i] + " years and " + containsWeeks[i] + " weeks");
             amount++;
         }
+    }
+    public static void jPrintResults(int jackYears,int jackWeeks) {
+        System.out.println("!!Jackpot!! It only took" + jackYears + " years and" + jackWeeks + " weeks!");
     }
 
     public static String[] leadingZero(int[] numbers) {
@@ -129,5 +147,46 @@ public class MyConsole {
             System.out.print("[" + lotto + "] ");
         }
         System.out.println();
+    }
+
+    public static void interFace(int min,int max,String[] userLotto, int[] playerNumbers) {
+        Console c = System.console();
+        String config;
+        boolean first = false;
+        boolean second = false;
+        boolean onlyJackpot = false;
+        boolean showAll = false;
+
+        //Not actually storing these at the moment
+        while(!first) {
+            System.out.println("Welcome to Lotto simulator, lets setup basic config\n Do you want to only calculate the jackpot, or all of the wins? (Got 1, right @ ...)\n" +
+                    "1. Only Jackpot\n" +
+                    "2. All the wins");
+            config = c.readLine();
+            if (config.equals("1")) {
+                onlyJackpot = true;
+                first = true;
+            } else if (config.equals("2")) {
+                first = true;
+            } else {
+                System.out.println("Invalid input");
+            }
+        }
+        while (!second) {
+            System.out.println("Thanks.. Next up, \n Do you want to show all the random lotto numbers and compare them to the users numbers? (This makes the calculations very slow...\n" +
+                    "1. Show them all(slower)\n" +
+                    "2. Do not show them(faster)");
+            config = c.readLine();
+            if(config.equals("1")) {
+                showAll = true;
+                second = true;
+            } else if(config.equals("2")){
+                second = true;
+            } else {
+                System.out.println("Invalid input");
+            }
+        }
+        System.out.println("Thanks, lets play...");
+        playLotto(min, max, playerNumbers, userLotto, onlyJackpot, showAll);
     }
 }

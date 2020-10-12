@@ -20,13 +20,22 @@ public class Arrays {
         return false;
     }
 
-    public static int containsSameValues(int[] array1, int[] array2) {
+    public static int containsSameValues(int[] array1, int[] array2, boolean onlyJackpot) {
         int amountOfContains = 0;
-        for (int k : array1) {
-            for (int j = 0; j < array1.length; j++) {
-                if (k == array2[j]) {
-                    amountOfContains++;
+        if(!onlyJackpot) {
+            for (int k : array1) {
+                for (int j = 0; j < array1.length; j++) {
+                    if (k == array2[j]) {
+                        amountOfContains++;
+                    }
                 }
+            }
+        } else {
+            for (int i = 0; i < array1.length; i++) {
+                if(array1[i] != array2[i]) {
+                    break;
+                }
+                amountOfContains++;
             }
         }
         return amountOfContains;

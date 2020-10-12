@@ -4,7 +4,6 @@ import fi.tuni.tamk.tiko.eemil.util.Arrays;
 import fi.tuni.tamk.tiko.eemil.util.MyConsole;
 
 
-
 //HUOM!! VUOTENA KÄYTETÄÄN 52 VIIKKOA, EI 52,143 VIIKKOA!!!!
 
 public class Main {
@@ -19,13 +18,13 @@ public class Main {
 
 
     public static void main(String[] args) {
+        
         //Init the players Lotto numbers
         int[] playerNumbers = Arrays.lottoArrayUser(min, max);
         //Sort the users Lotto numbers
         Arrays.sortNumbers(playerNumbers);
         String [] userLotto = MyConsole.leadingZero(playerNumbers);
-        //Go to the main loop
-       MyConsole.playLotto(min, max, playerNumbers, userLotto);
-
+        //Setup the lotto and start playing
+        MyConsole.interFace(min, max, userLotto, playerNumbers);
     }
 }
