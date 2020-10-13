@@ -3,6 +3,8 @@ package fi.tuni.tamk.tiko.eemil;
 import fi.tuni.tamk.tiko.eemil.util.Arrays;
 import fi.tuni.tamk.tiko.eemil.util.MyConsole;
 
+import java.util.Locale;
+
 
 //HUOM!! VUOTENA KÄYTETÄÄN 52 VIIKKOA, EI 52,143 VIIKKOA!!!!
 
@@ -10,14 +12,13 @@ public class Main {
     //Some Strings and parameters
     public static int min = 1;
     public static int max = 40;
-    public static String numberMsg = "Give a number between 1 and 40";
-    public static String errorMsg = "Give a proper number";
-    public static String errorMessageNonMinAndMax = "The number has to be between 1 and 40";
-    public static String errorMessageSameNumber = "You have already given this number";
-    public static String calc = "Calculating how long does it take to hit the jackpot....";
+    public static Locale currentLocale;
 
 
     public static void main(String[] args) {
+        String language = "en";
+        String country = "US";
+        currentLocale = new Locale(language, country);
         
         //Init the players Lotto numbers
         int[] playerNumbers = Arrays.lottoArrayUser(min, max);
@@ -25,6 +26,6 @@ public class Main {
         Arrays.sortNumbers(playerNumbers);
         String [] userLotto = MyConsole.leadingZero(playerNumbers);
         //Setup the lotto and start playing
-        MyConsole.interFace(min, max, userLotto, playerNumbers);
+        MyConsole.config(userLotto, playerNumbers);
     }
 }

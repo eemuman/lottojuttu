@@ -2,13 +2,15 @@ package fi.tuni.tamk.tiko.eemil.util;
 
 import java.io.Console;
 
-import static fi.tuni.tamk.tiko.eemil.Main.calc;
+//import static fi.tuni.tamk.tiko.eemil.Main.calc;
+//import static fi.tuni.tamk.tiko.eemil.Main.numberMsg;
 
 public class MyConsole {
-
-    public static int readInt(int min, int max, int[] lottoNumbers, String errorMessageNonNumeric, String errorMessageNonMinAndMax, String errorMessageSameNumber, String numberMsg) {
+    static localestrings y = new localestrings();
+    public static int readInt(int min, int max, int[] lottoNumbers) {
         //Reads the users given input and tests whether the input is A) a number B) a whole number C) NOT a number the user has given already.
         Console c = System.console();
+
         boolean properNumber = false;
         boolean numberTrue = false;
         boolean within = false;
@@ -16,7 +18,7 @@ public class MyConsole {
         int input = 0;
         int realInt = 0;
         while (!properNumber) {
-            System.out.println(numberMsg);
+            System.out.println(y.numberMsg);
             //Testing if the input is actually a whole number
             while (!numberTrue) {
                 try {
@@ -24,21 +26,21 @@ public class MyConsole {
                     numberTrue = true;
 
                 } catch (NumberFormatException e) {
-                    System.out.println(errorMessageNonNumeric);
+                    System.out.println(y.errorMsg);
                 }
             }
             //Testing whether the number is within the min and max numbers
             realInt = input >= min && input <= max ? input : 0;
             //If the number isn't within the given min and max, it returns zero and the error msg is given, also the loop starts again.
             if (realInt == 0) {
-                System.out.println(errorMessageNonMinAndMax);
+                System.out.println(y.errorMessageNonMinAndMax);
                 numberTrue = false;
             } else {
                 within = true;
             }
             //If the above is true, check whether the number already exists on the users lotto numbers. If it is, start the loop again.
             if (Arrays.contains(input, lottoNumbers)) {
-                System.out.println(errorMessageSameNumber);
+                System.out.println(y.errorMessageSameNumber);
                 numberTrue = false;
             }  else {
                 notTheSame = true;
@@ -51,7 +53,7 @@ public class MyConsole {
             return realInt;
     }
 
-    public static void playLotto(int min, int max, int[] playerNumbers, String[] userLotto, boolean onlyJackpot, boolean showAll) {
+    public static void playLotto(int[] playerNumbers, String[] userLotto, boolean onlyJackpot, boolean showAll) {
         int contains = 0;
         int jackWeeks = 0;
         int jackYears;
@@ -59,10 +61,10 @@ public class MyConsole {
         int [] containsYears = new int[playerNumbers.length];
         int weeks = 0;
         String[] randomLotto;
-        System.out.println(calc);
+        System.out.println(y.calc);
         while(contains < 7) {
             // Generate random lotto numbers
-            int[] lottoNumbers = Arrays.lottoArrayRandomNumbers(min, max);
+            int[] lottoNumbers = Arrays.lottoArrayRandomNumbers();
             // Put the random numbers into order from smallest -> highest
             if(showAll || onlyJackpot) {
                 Arrays.sortNumbers(lottoNumbers);
@@ -117,12 +119,12 @@ public class MyConsole {
     public static void printResults(int[] containsYears, int[]containsWeeks) {
         int amount = 1;
         for (int i = 0; i < containsWeeks.length; i++) {
-            System.out.println("Got " + amount + " right, it took " + containsYears[i] + " years and " + containsWeeks[i] + " weeks");
+            System.out.println(y.printresultAll);
             amount++;
         }
     }
     public static void printResults(int jackYears,int jackWeeks) {
-        System.out.println("!!Jackpot!! It only took " + jackYears + " years and " + jackWeeks + " weeks!");
+        System.out.println(y.printresultJackpoit);
     }
 
     public static String[] leadingZero(int[] numbers) {
@@ -153,7 +155,7 @@ public class MyConsole {
         System.out.println();
     }
 
-    public static void interFace(int min,int max,String[] userLotto, int[] playerNumbers) {
+    public static void config(String[] userLotto, int[] playerNumbers) {
         Console c = System.console();
         String config;
         boolean first = false;
@@ -163,9 +165,7 @@ public class MyConsole {
 
         //Not actually storing these at the moment
         while(!first) {
-            System.out.println("Welcome to Lotto simulator, lets setup basic config\n Do you want to only calculate the jackpot, or all of the wins? (Got 1, right @ ...)\n" +
-                    "1. Only Jackpot\n" +
-                    "2. All the wins");
+            System.out.println(y.firstQuestion);
             config = c.readLine();
             if (config.equals("1")) {
                 onlyJackpot = true;
@@ -173,13 +173,11 @@ public class MyConsole {
             } else if (config.equals("2")) {
                 first = true;
             } else {
-                System.out.println("Invalid input");
+                System.out.println(y.invalidInput);
             }
         }
         while (!second) {
-            System.out.println("Thanks.. Next up, \n Do you want to show all the random lotto numbers and compare them to the users numbers? (This makes the calculations very slow...\n" +
-                    "1. Show them all(slower)\n" +
-                    "2. Do not show them(faster)");
+            System.out.println(y.secondQuestion);
             config = c.readLine();
             if(config.equals("1")) {
                 showAll = true;
@@ -187,11 +185,15 @@ public class MyConsole {
             } else if(config.equals("2")){
                 second = true;
             } else {
-                System.out.println("Invalid input");
+                System.out.println(y.invalidInput);
             }
         }
-        System.out.println("Thanks, lets play...");
-        playLotto(min, max, playerNumbers, userLotto, onlyJackpot, showAll);
+        System.out.println(y.thanks);
+        playLotto(playerNumbers, userLotto, onlyJackpot, showAll);
+    }
+    public static void startUp() {
+        System.out.println(y.welocme);
+
     }
 
 }

@@ -1,5 +1,4 @@
 package fi.tuni.tamk.tiko.eemil.util;
-import fi.tuni.tamk.tiko.eemil.Main;
 
 public class Arrays {
 
@@ -46,12 +45,12 @@ public class Arrays {
         int[] lottoNumbers = new int[7];
         // Start building users Lotto numbers array
         for (int i = 0; i < lottoNumbers.length; i++) {
-            lottoNumbers[i] = MyConsole.readInt(min, max, lottoNumbers, Main.errorMsg, Main.errorMessageNonMinAndMax, Main.errorMessageSameNumber, Main.numberMsg);
+            lottoNumbers[i] = MyConsole.readInt(min, max, lottoNumbers);
         }
         return lottoNumbers;
     }
 
-    public static int[] lottoArrayRandomNumbers(int min, int max) {
+    public static int[] lottoArrayRandomNumbers() {
         int tempnumber = 1;
         int number = 0;
         boolean Done = false;
