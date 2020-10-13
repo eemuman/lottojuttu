@@ -6,8 +6,6 @@ import static fi.tuni.tamk.tiko.eemil.Main.calc;
 
 public class MyConsole {
 
-
-
     public static int readInt(int min, int max, int[] lottoNumbers, String errorMessageNonNumeric, String errorMessageNonMinAndMax, String errorMessageSameNumber, String numberMsg) {
         //Reads the users given input and tests whether the input is A) a number B) a whole number C) NOT a number the user has given already.
         Console c = System.console();
@@ -93,7 +91,7 @@ public class MyConsole {
         printResults(containsYears, containsWeeks);
         } else {
             jackYears = Math.weekstoYears(jackWeeks);
-            jackWeeks = Math.yearstoWeeks(jackWeeks, jackYears);
+            jackWeeks = Math.leftoverWeeks(jackWeeks, jackYears);
             printResults(jackYears, jackWeeks);
         }
     }
@@ -195,4 +193,5 @@ public class MyConsole {
         System.out.println("Thanks, lets play...");
         playLotto(min, max, playerNumbers, userLotto, onlyJackpot, showAll);
     }
+
 }

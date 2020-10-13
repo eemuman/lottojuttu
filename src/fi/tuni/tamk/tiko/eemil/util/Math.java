@@ -50,7 +50,7 @@ public class Math {
     public static int weekstoYears (int weeks) {
          return weeks / 52;
     }
-    public static int yearstoWeeks(int weeks, int years) {
+    public static int leftoverWeeks(int weeks, int years) {
         years *= 52;
         weeks -= years;
         return weeks;
