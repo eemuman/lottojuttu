@@ -17,6 +17,11 @@ public class localestrings {
    String secondQuestion = messages.getString("secondquestion");
    String invalidInput = messages.getString("invalidinput");
    String thanks = messages.getString("thanks");
-   String printresultAll = messages.getString("printresultAll");
-   String printresultJackpoit = messages.getString("printresultJackpot");
+   String jackpotpt1 = messages.getString("jackpotpt1");
+   String jackpotpt2 = messages.getString("jackpotpt2");
+   String jackpotpt3 = messages.getString("jackpotpt3");
+   String allpt1 = messages.getString("allpt1");
+   String allpt2 = messages.getString("allpt2");
+   String allpt3 = messages.getString("allpt3");
+   String allpt4 = messages.getString("allpt4");
 }

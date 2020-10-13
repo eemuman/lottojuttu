@@ -21,9 +21,8 @@ public class Arrays {
         return false;
     }
 
-    public static int containsSameValues(int[] array1, int[] array2, boolean onlyJackpot) {
+    public static int containsSameValues(int[] array1, int[] array2) {
         int amountOfContains = 0;
-        if(!onlyJackpot) {
             for (int k : array1) {
                 for (int j = 0; j < array1.length; j++) {
                     if (k == array2[j]) {
@@ -31,15 +30,15 @@ public class Arrays {
                     }
                 }
             }
-        } else {
-            for (int i = 0; i < array1.length; i++) {
-                if(array1[i] != array2[i]) {
-                    break;
-                }
-                amountOfContains++;
+        return amountOfContains;
+    }
+    public static boolean containSameValuesOnlyJ(int[] array1, int[] array2) {
+        for (int i = 0; i < array1.length; i++) {
+            if(array1[i] != array2[i]){
+                return false;
             }
         }
-        return amountOfContains;
+        return true;
     }
 
     public static int[] lottoArrayUser(int min, int max) {

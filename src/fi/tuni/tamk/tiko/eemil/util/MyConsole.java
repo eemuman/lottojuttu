@@ -2,9 +2,6 @@ package fi.tuni.tamk.tiko.eemil.util;
 
 import java.io.Console;
 
-//import static fi.tuni.tamk.tiko.eemil.Main.calc;
-//import static fi.tuni.tamk.tiko.eemil.Main.numberMsg;
-
 public class MyConsole {
     static localestrings y = new localestrings();
     static Console c = System.console();
@@ -17,8 +14,8 @@ public class MyConsole {
         int realInt = 0;
         while (!properNumber) {
             System.out.println(y.numberMsg);
-            //Testing if the input is actually a whole number
-            while (!numberTrue) {
+            while(!numberTrue) {
+                //Testing if the input is actually a whole number
                 input = properNumber();
                 numberTrue = true;
             }
@@ -53,7 +50,13 @@ public class MyConsole {
                 Arrays.sortNumbers(lottoNumbers);
             }
             // Test if the numbers match (Jackpot!)
-            contains = Arrays.containsSameValues(playerNumbers, lottoNumbers, onlyJackpot);
+            if(!onlyJackpot) {
+                contains = Arrays.containsSameValues(playerNumbers, lottoNumbers);
+            } else {
+                if(Arrays.containSameValuesOnlyJ(playerNumbers, lottoNumbers)) {
+                    contains = 7;
+                }
+            }
             // Go to the next week...
             weeks++;
             // Check at what point we got what.
@@ -103,13 +106,13 @@ public class MyConsole {
     public static void printResults(int[] containsYears, int[] containsWeeks) {
         int amount = 1;
         for (int i = 0; i < containsWeeks.length; i++) {
-            System.out.println(y.printresultAll);
+            System.out.println(y.allpt1 + amount + y.allpt2 + containsYears[i] + y.allpt3 + containsWeeks[i] + y.allpt4);
             amount++;
         }
     }
 
     public static void printResults(int jackYears, int jackWeeks) {
-        System.out.println(y.printresultJackpoit);
+        System.out.println(y.jackpotpt1 + jackYears + y.jackpotpt2 + jackWeeks + y.jackpotpt3);
     }
 
     public static String[] leadingZero(int[] numbers) {
