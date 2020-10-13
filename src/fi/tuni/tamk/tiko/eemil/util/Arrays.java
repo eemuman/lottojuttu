@@ -1,7 +1,8 @@
 package fi.tuni.tamk.tiko.eemil.util;
 
-public class Arrays {
 
+public class Arrays {
+    static localestrings y = new localestrings();
     public static int [] toIntArray(String [] array) {
         int[] tempArray = new int[array.length];
         for (int i=0;i<array.length;++i) {
@@ -13,6 +14,7 @@ public class Arrays {
     public static boolean contains(int value, int [] array) {
         for (int j : array) {
             if (j == value) {
+                System.out.println(y.errorMessageSameNumber);
                 return true;
             }
         }

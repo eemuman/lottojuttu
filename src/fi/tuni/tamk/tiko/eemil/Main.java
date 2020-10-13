@@ -16,8 +16,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String language = "en";
-        String country = "US";
+        String language = "fi";
+        String country = "FI";
         currentLocale = new Locale(language, country);
         
         //Init the players Lotto numbers
