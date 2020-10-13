@@ -8,7 +8,6 @@ public class Math {
     }
 
     public static int[] removeRandNumb(int[] rndNumbers, int rndNumber) {
-        int randSkip = 0;
         int calc = 0;
         int[] newLotto = new int[rndNumbers.length -1];
         //Take the Lotto random array and remove the random number from it to prevent duplicates
