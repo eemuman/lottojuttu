@@ -32,7 +32,6 @@ public class Math {
         for (int i = 0; i < containsWeeks.length; i++) {
             years[i] = containsWeeks[i] / 52;
         }
-        Math.leftoverWeeks(containsWeeks, containsYears);
         return years;
     }
     public static int[] leftoverWeeks (int[] weeks, int[] years) {
@@ -48,10 +47,10 @@ public class Math {
         return weeks;
     }
 
-    public static int jWeekstoYears (int weeks) {
+    public static int weekstoYears (int weeks) {
          return weeks / 52;
     }
-    public static int jYearstoWeeks(int weeks, int years) {
+    public static int yearstoWeeks(int weeks, int years) {
         years *= 52;
         weeks -= years;
         return weeks;

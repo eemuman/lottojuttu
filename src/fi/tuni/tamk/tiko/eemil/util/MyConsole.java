@@ -74,7 +74,11 @@ public class MyConsole {
             // Go to the next week...
             weeks++;
             // Check at what point we got what.
-            containsChecker(contains, weeks, containsWeeks, onlyJackpot);
+            if(!onlyJackpot) {
+                containsChecker(contains, weeks, containsWeeks);
+            } else {
+                jackWeeks = containsChecker(contains, weeks, jackWeeks);
+            }
             if(showAll) {
                 randomLotto = leadingZero(lottoNumbers);
                 // Print the numbers, there will be MANY!!!
@@ -84,30 +88,32 @@ public class MyConsole {
         if(!onlyJackpot) {
             //Calculating the years all the wins took
             containsYears = Math.weeksToYears(containsWeeks, containsYears);
-        //Print the results
+            containsWeeks = Math.leftoverWeeks(containsWeeks, containsYears);
+            //Print the results
         printResults(containsYears, containsWeeks);
         } else {
-            jackYears = Math.jWeekstoYears(jackWeeks);
-            jackWeeks = Math.jYearstoWeeks(jackWeeks, jackYears);
-            jPrintResults(jackYears, jackWeeks);
+            jackYears = Math.weekstoYears(jackWeeks);
+            jackWeeks = Math.yearstoWeeks(jackWeeks, jackYears);
+            printResults(jackYears, jackWeeks);
         }
     }
 
-    public static int [] containsChecker(int contains,int weeks, int[] containsWeeks, boolean onlyJackpot) {
-        if(onlyJackpot) {
-            if(contains == 7) {
-                containsWeeks[contains] = weeks;
-            }
-        } else {
-            //Check if the current lottery win is not initialized and initialize it with how many weeks it took..
+    public static int [] containsChecker(int contains,int weeks, int[] containsWeeks) {
+         //Check if the current lottery win is not initialized and initialize it with how many weeks it took..
             while (contains > 0) {
                 contains--;
                 if (containsWeeks[contains] == 0) {
                     containsWeeks[contains] = weeks;
                 }
             }
-        }
+
         return containsWeeks;
+    }
+    public static int containsChecker(int contains, int weeks, int jackWeeks) {
+            if(contains == 7) {
+                jackWeeks = weeks;
+            }
+            return jackWeeks;
     }
 
     public static void printResults(int[] containsYears, int[]containsWeeks) {
@@ -117,8 +123,8 @@ public class MyConsole {
             amount++;
         }
     }
-    public static void jPrintResults(int jackYears,int jackWeeks) {
-        System.out.println("!!Jackpot!! It only took" + jackYears + " years and" + jackWeeks + " weeks!");
+    public static void printResults(int jackYears,int jackWeeks) {
+        System.out.println("!!Jackpot!! It only took " + jackYears + " years and " + jackWeeks + " weeks!");
     }
 
     public static String[] leadingZero(int[] numbers) {
