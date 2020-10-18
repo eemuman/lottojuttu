@@ -8,7 +8,6 @@ public class Math {
     }
 
     public static int[] removeRandNumb(int[] rndNumbers, int rndNumber) {
-        int randSkip = 0;
         int calc = 0;
         int[] newLotto = new int[rndNumbers.length -1];
         //Take the Lotto random array and remove the random number from it to prevent duplicates
@@ -26,11 +25,11 @@ public class Math {
         return newLotto;
     }
 
-    public static int [] weeksToYears (int[] weeks) {
-        int[] years = new int[weeks.length];
+    public static int [] weeksToYears (int[] containsWeeks, int[] containsYears) {
+        int[] years = new int[containsWeeks.length];
         // Turning the weeks to years
-        for (int i = 0; i < weeks.length; i++) {
-            years[i] = weeks[i] / 52;
+        for (int i = 0; i < containsWeeks.length; i++) {
+            years[i] = containsWeeks[i] / 52;
         }
         return years;
     }
@@ -44,6 +43,15 @@ public class Math {
         for (int i = 0; i < weeks.length; i++) {
             years[i] /= 52;
         }
+        return weeks;
+    }
+
+    public static int weekstoYears (int weeks) {
+         return weeks / 52;
+    }
+    public static int leftoverWeeks(int weeks, int years) {
+        years *= 52;
+        weeks -= years;
         return weeks;
     }
 }

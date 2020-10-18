@@ -1,8 +1,8 @@
 package fi.tuni.tamk.tiko.eemil.util;
-import fi.tuni.tamk.tiko.eemil.Main;
+
 
 public class Arrays {
-
+    static localestrings y = new localestrings();
     public static int [] toIntArray(String [] array) {
         int[] tempArray = new int[array.length];
         for (int i=0;i<array.length;++i) {
@@ -14,6 +14,7 @@ public class Arrays {
     public static boolean contains(int value, int [] array) {
         for (int j : array) {
             if (j == value) {
+                System.out.println(y.errorMessageSameNumber);
                 return true;
             }
         }
@@ -22,14 +23,22 @@ public class Arrays {
 
     public static int containsSameValues(int[] array1, int[] array2) {
         int amountOfContains = 0;
-        for (int k : array1) {
-            for (int j = 0; j < array1.length; j++) {
-                if (k == array2[j]) {
-                    amountOfContains++;
+            for (int k : array1) {
+                for (int j = 0; j < array1.length; j++) {
+                    if (k == array2[j]) {
+                        amountOfContains++;
+                    }
                 }
             }
-        }
         return amountOfContains;
+    }
+    public static boolean containSameValuesOnlyJ(int[] array1, int[] array2) {
+        for (int i = 0; i < array1.length; i++) {
+            if(array1[i] != array2[i]){
+                return false;
+            }
+        }
+        return true;
     }
 
     public static int[] lottoArrayUser(int min, int max) {
@@ -37,12 +46,12 @@ public class Arrays {
         int[] lottoNumbers = new int[7];
         // Start building users Lotto numbers array
         for (int i = 0; i < lottoNumbers.length; i++) {
-            lottoNumbers[i] = MyConsole.readInt(min, max, lottoNumbers, Main.errorMsg, Main.errorMessageNonMinAndMax, Main.errorMessageSameNumber, Main.numberMsg);
+            lottoNumbers[i] = MyConsole.readInt(min, max, lottoNumbers);
         }
         return lottoNumbers;
     }
 
-    public static int[] lottoArrayRandomNumbers(int min, int max) {
+    public static int[] lottoArrayRandomNumbers() {
         int tempnumber = 1;
         int number = 0;
         boolean Done = false;
@@ -101,4 +110,7 @@ public class Arrays {
         }
         return numbers;
     }
+
+    
+
 }
