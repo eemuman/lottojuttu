@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"fi.tuni.tamk.tiko.eemil.util","l":"Arrays"},{"p":"fi.tuni.tamk.tiko.eemil.util","l":"localestrings"},{"p":"fi.tuni.tamk.tiko.eemil","l":"Main"},{"p":"fi.tuni.tamk.tiko.eemil.util","l":"Math"},{"p":"fi.tuni.tamk.tiko.eemil.util","l":"MyConsole"}]

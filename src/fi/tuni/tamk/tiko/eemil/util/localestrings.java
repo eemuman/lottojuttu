@@ -4,6 +4,9 @@ import fi.tuni.tamk.tiko.eemil.Main;
 
 import java.util.ResourceBundle;
 
+/**
+ * Different strings used by the application
+ */
 public class localestrings {
 
    ResourceBundle messages = ResourceBundle.getBundle("fi/tuni/tamk/tiko/eemil/resources/strings", Main.currentLocale);

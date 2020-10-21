@@ -1,11 +1,26 @@
 package fi.tuni.tamk.tiko.eemil.util;
 
 import java.io.Console;
+/**
+ *This class contains several methods that help during the Lotto application
+ */
 
 public class MyConsole {
+
     static localestrings y = new localestrings();
     static Console c = System.console();
 
+    /**
+     * This method tests the user input against several checks, the checks are as follows:
+     * -That it actually is a a whole number
+     * -That the number is between the min and max
+     * -That it is not already been given by the user
+     *
+     * @param min The minimum number that the users number has to be
+     * @param max The maximum number that the users number has to be
+     * @param lottoNumbers Is as parameter to check whether the user has already given the number
+     * @return After doing the checks, returns the users input
+     */
     public static int readInt(int min, int max, int[] lottoNumbers) {
         //Reads the users given input and tests whether the input is A) a number B) a whole number C) NOT a number the user has given already.
         boolean properNumber = false;
@@ -33,6 +48,14 @@ public class MyConsole {
         return realInt;
     }
 
+    /**
+     * This method is the main Lotto method, it generates new lotto numbers, tests them against the users numbers and calculates how long it took
+     *
+     * @param playerNumbers Users lotto numbers
+     * @param userLotto Users lotto numbers with leading zeroes
+     * @param onlyJackpot Parameter to check if we want to only calculate the jackpot
+     * @param showAll Parameter to check if we want to show all the lotto numbers the program generates
+     */
     public static void playLotto(int[] playerNumbers, String[] userLotto, boolean onlyJackpot, boolean showAll) {
         int contains = 0;
         int jackWeeks = 0;
@@ -84,6 +107,14 @@ public class MyConsole {
         }
     }
 
+    /**
+     * This method calculates how long it took to win
+     *
+     * @param contains Check if the user has already won that certain win
+     * @param weeks How many weeks it has been
+     * @param containsWeeks Used to calculate how many weeks does it take per win
+     * @return returns containsWeeks
+     */
     public static int[] containsChecker(int contains, int weeks, int[] containsWeeks) {
         //Check if the current lottery win is not initialized and initialize it with how many weeks it took..
         while (contains > 0) {
@@ -96,6 +127,14 @@ public class MyConsole {
         return containsWeeks;
     }
 
+    /**
+     * Polymorph of the above method, used when calculating only the jackpot win
+     *
+     * @param contains Check if the user has already won that certain win
+     * @param weeks How many weeks it has been
+     * @param jackWeeks Used to calculate how many weeks does it take per win
+     * @return jackWeeks
+     */
     public static int containsChecker(int contains, int weeks, int jackWeeks) {
         if (contains == 7) {
             jackWeeks = weeks;
@@ -103,6 +142,12 @@ public class MyConsole {
         return jackWeeks;
     }
 
+    /**
+     * Prints how long each won took
+     *
+     * @param containsYears How many years it took, per win
+     * @param containsWeeks How many weeks it took, per win
+     */
     public static void printResults(int[] containsYears, int[] containsWeeks) {
         int amount = 1;
         for (int i = 0; i < containsWeeks.length; i++) {
@@ -111,10 +156,21 @@ public class MyConsole {
         }
     }
 
+    /**
+     * Polymorph of the above, used when only jackpot is enabled
+     * @param jackYears How many years it took, per win
+     * @param jackWeeks How many weeks it took, per win
+     */
     public static void printResults(int jackYears, int jackWeeks) {
         System.out.println(y.jackpotpt1 + jackYears + y.jackpotpt2 + jackWeeks + y.jackpotpt3);
     }
 
+    /**
+     * Adds leading zeroes to an a array
+     *
+     * @param numbers the numbers you want to add leading zeroes into
+     * @return returns the array with leading zeroes.
+     */
     public static String[] leadingZero(int[] numbers) {
         //Add leading zero if number is < 10
         String[] temp = new String[numbers.length];
@@ -129,6 +185,12 @@ public class MyConsole {
         return temp;
     }
 
+    /**
+     * Used to print all the calculated lotto numbers, when that parameter is enabled
+     *
+     * @param userLotto Users lotto numbers
+     * @param randLotto Randomized lotto numbers
+     */
     public static void printNumbers(String[] userLotto, String[] randLotto) {
         //Print the users and the generated lotto numbers
         System.out.print("Users numbers: ");
@@ -143,6 +205,12 @@ public class MyConsole {
         System.out.println();
     }
 
+    /**
+     * A simple config, horrible execution
+     *
+     * @param userLotto User lottonumbers with leading zeroes
+     * @param playerNumbers Users lottonumbers without leading zeroes
+     */
     public static void config(String[] userLotto, int[] playerNumbers) {
         Console c = System.console();
         String config;
@@ -180,11 +248,11 @@ public class MyConsole {
         playLotto(playerNumbers, userLotto, onlyJackpot, showAll);
     }
 
-    public static void startUp() {
-        System.out.println(y.welocme);
 
-    }
-
+    /**
+     * @param realInt An integer
+     * @return returns true or false
+     */
     public static boolean realIntChecker(int realInt) {
         if (realInt == 0) {
             System.out.println(y.errorMessageNonMinAndMax);
@@ -193,6 +261,10 @@ public class MyConsole {
         return false;
     }
 
+    /**
+     * This method takes user input and tests that its an whole number
+     * @return An integer that is tested to be a whole number
+     */
     public static int properNumber() {
         boolean numberTrue = false;
         int input = 0;
